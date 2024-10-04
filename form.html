@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Form Filler</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+            max-width: 800px;
+        }
+        .section-header {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Fill PDF Form</h2>
+        <form action="{{ url_for('fill_form_route') }}" method="POST">
+            <!-- Party Information -->
+            <div class="section-header">
+                <h4>Party Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="cname1">Your Name</label>
+                <input type="text" class="form-control" id="cname1" name="cname1" required>
+            </div>
+            <div class="form-group">
+                <label for="cname2">Your Name (continued)</label>
+                <input type="text" class="form-control" id="cname2" name="cname2" required>
+            </div>
+            <div class="form-group">
+                <label for="cname3">Other Party's Name</label>
+                <input type="text" class="form-control" id="cname3" name="cname3" required>
+            </div>
+            <div class="form-group">
+                <label for="cname4">Your Name (again)</label>
+                <input type="text" class="form-control" id="cname4" name="cname4" required>
+            </div>
+            <div class="form-group">
+                <label for="cself">Self-Representation</label>
+                <input type="text" class="form-control" id="cself" name="cself" required>
+            </div>
+            <div class="form-group">
+                <label for="State">State</label>
+                <input type="text" class="form-control" id="State" name="State" required>
+            </div>
+            <div class="form-group">
+                <label for="Zip">Zip Code</label>
+                <input type="text" class="form-control" id="Zip" name="Zip" required>
+            </div>
+            <div class="form-group">
+                <label for="cnumber1">Phone Number</label>
+                <input type="text" class="form-control" id="cnumber1" name="cnumber1" required>
+            </div>
+            <div class="form-group">
+                <label for="cnumber2">Alternate Phone Number</label>
+                <input type="text" class="form-control" id="cnumber2" name="cnumber2">
+            </div>
+            <div class="form-group">
+                <label for="cemail">Email Address</label>
+                <input type="email" class="form-control" id="cemail" name="cemail" required>
+            </div>
+            <div class="form-group">
+                <label for="ccourt1">Court Name</label>
+                <input type="text" class="form-control" id="ccourt1" name="ccourt1" required>
+            </div>
+            <div class="form-group">
+                <label for="ccourt2">Court County</label>
+                <input type="text" class="form-control" id="ccourt2" name="ccourt2" required>
+            </div>
+            <div class="form-group">
+                <label for="ccourt3">Court Street Address</label>
+                <input type="text" class="form-control" id="ccourt3" name="ccourt3" required>
+            </div>
+            <div class="form-group">
+                <label for="ccourt4">Court City, State, Zip</label>
+                <input type="text" class="form-control" id="ccourt4" name="ccourt4" required>
+            </div>
+            <div class="form-group">
+                <label for="cpet1">Your Role</label>
+                <input type="text" class="form-control" id="cpet1" name="cpet1" required>
+            </div>
+            <div class="form-group">
+                <label for="cdef1">Other Party's Role</label>
+                <input type="text" class="form-control" id="cdef1" name="cdef1" required>
+            </div>
+            <div class="form-group">
+                <label for="cop1">Leave Blank if Not Applicable</label>
+                <input type="text" class="form-control" id="cop1" name="cop1">
+            </div>
+
+            <!-- Case Information -->
+            <div class="section-header">
+                <h4>Case Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="ccase">Case Number</label>
+                <input type="text" class="form-control" id="ccase" name="ccase" required>
+            </div>
+            <div class="form-group">
+                <label for="cresps1">Additional Respondents (if any)</label>
+                <input type="text" class="form-control" id="cresps1" name="cresps1">
+            </div>
+            <div class="form-group">
+                <label for="cdate1">Date of Signature</label>
+                <input type="date" class="form-control" id="cdate1" name="cdate1" required>
+            </div>
+
+            <!-- Request Information -->
+            <div class="section-header">
+                <h4>Request Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="rfo_4">Child Custody</label>
+                <select class="form-control" id="rfo_4" name="rfo_4">
+                    <option value="Yes">Yes</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rfo_2">Checkbox 2</label>
+                <select class="form-control" id="rfo_2" name="rfo_2">
+                    <option value="Yes">Yes</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <!-- Repeat for other checkboxes as needed -->
+            <div class="form-group">
+                <label for="rfo15">Other</label>
+                <select class="form-control" id="rfo15" name="rfo15">
+                    <option value="Yes">Yes</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Text_Field0">Specify Other</label>
+                <input type="text" class="form-control" id="Text_Field0" name="Text_Field0">
+            </div>
+
+            <!-- Hearing Information -->
+            <div class="section-header">
+                <h4>Hearing Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="Hearing_date">Hearing Date</label>
+                <input type="date" class="form-control" id="Hearing_date" name="Hearing_date" required>
+            </div>
+            <div class="form-group">
+                <label for="Hearing_time">Hearing Time</label>
+                <input type="time" class="form-control" id="Hearing_time" name="Hearing_time" required>
+            </div>
+            <div class="form-group">
+                <label for="Hearing_department">Hearing Department</label>
+                <input type="text" class="form-control" id="Hearing_department" name="Hearing_department" required>
+            </div>
+
+            <!-- Facts in Support -->
+            <div class="section-header">
+                <h4>Facts in Support</h4>
+            </div>
+            <div class="form-group">
+                <label for="Facts_in_Support">Facts in Support</label>
+                <textarea class="form-control" id="Facts_in_Support" name="Facts_in_Support" rows="4" required></textarea>
+            </div>
+
+            <!-- Additional Fields -->
+            <div class="section-header">
+                <h4>Additional Fields</h4>
+            </div>
+            <div class="form-group">
+                <label for="rfo_cs_date">Date of Previous Order</label>
+                <input type="date" class="form-control" id="rfo_cs_date" name="rfo_cs_date" required>
+            </div>
+            <div class="form-group">
+                <label for="rfo_cs_order">Details of the Order</label>
+                <input type="text" class="form-control" id="rfo_cs_order" name="rfo_cs_order" required>
+            </div>
+            <div class="form-group">
+                <label for="dec_1_line17">Declaration</label>
+                <textarea class="form-control" id="dec_1_line17" name="dec_1_line17" rows="3" required></textarea>
+            </div>
+
+            <!-- Signature -->
+            <div class="section-header">
+                <h4>Signature</h4>
+            </div>
+            <div class="form-group">
+                <label for="cdate1">Date</label>
+                <input type="date" class="form-control" id="cdate1" name="cdate1" required>
+            </div>
+            <div class="form-group">
+                <label for="cname2">Your Printed Name</label>
+                <input type="text" class="form-control" id="cname2" name="cname2" required>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="section-header">
+                <h4>Checkbox Selections</h4>
+            </div>
+            <div class="form-group">
+                <label for="cbox_mod">Modification Box</label>
+                <select class="form-control" id="cbox_mod" name="cbox_mod">
+                    <option value="Yes">Yes</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dec_box_1_27">Declaration Box 1.27</label>
+                <select class="form-control" id="dec_box_1_27" name="dec_box_1_27">
+                    <option value="Yes">Yes</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <!-- Repeat for other checkboxes as needed -->
+
+            <!-- Income Information -->
+            <div class="section-header">
+                <h4>Income Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="My_gross_monthly_income_is_dec">My Gross Monthly Income</label>
+                <input type="text" class="form-control" id="My_gross_monthly_income_is_dec" name="My_gross_monthly_income_is_dec" required>
+            </div>
+
+            <!-- Child Information -->
+            <div class="section-header">
+                <h4>Child Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="rfo_cs_n1">Child's Name</label>
+                <input type="text" class="form-control" id="rfo_cs_n1" name="rfo_cs_n1" required>
+            </div>
+            <div class="form-group">
+                <label for="rfo_m_1">Child's Age</label>
+                <input type="number" class="form-control" id="rfo_m_1" name="rfo_m_1" required>
+            </div>
+            <div class="form-group">
+                <label for="rfo_cs_n2">Additional Child's Name (if any)</label>
+                <input type="text" class="form-control" id="rfo_cs_n2" name="rfo_cs_n2">
+            </div>
+            <div class="form-group">
+                <label for="rfo_m_2">Additional Child's Age</label>
+                <input type="number" class="form-control" id="rfo_m_2" name="rfo_m_2">
+            </div>
+
+            <!-- Other Orders Requested -->
+            <div class="section-header">
+                <h4>Other Orders Requested</h4>
+            </div>
+            <div class="form-group">
+                <label for="Other_Orders_Requested">Other Orders Requested</label>
+                <textarea class="form-control" id="Other_Orders_Requested" name="Other_Orders_Requested" rows="3" required></textarea>
+            </div>
+
+            <!-- Attachments -->
+            <div class="section-header">
+                <h4>Attachments</h4>
+            </div>
+            <div class="form-group">
+                <label for="rfo_1_3e">Attachments</label>
+                <textarea class="form-control" id="rfo_1_3e" name="rfo_1_3e" rows="2" required></textarea>
+            </div>
+
+            <!-- Notice and Service -->
+            <div class="section-header">
+                <h4>Notice and Service</h4>
+            </div>
+            <div class="form-group">
+                <label for="servebox">Request Service</label>
+                <select class="form-control" id="servebox" name="servebox">
+                    <option value="Yes">Yes</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="otherparty">Name of Other Party to be Served</label>
+                <input type="text" class="form-control" id="otherparty" name="otherparty" required>
+            </div>
+
+            <!-- Declarations -->
+            <div class="section-header">
+                <h4>Declarations</h4>
+            </div>
+            <div class="form-group">
+                <label for="Following_are_the_facts_regarding_this_circumstance_1_dec_1">Facts Regarding Circumstance</label>
+                <textarea class="form-control" id="Following_are_the_facts_regarding_this_circumstance_1_dec_1" name="Following_are_the_facts_regarding_this_circumstance_1_dec_1" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Other_circumstances_exist_that_I_am_requesting_the_court_to_take_into_consideration_in_dec_2_22">Other Circumstances</label>
+                <textarea class="form-control" id="Other_circumstances_exist_that_I_am_requesting_the_court_to_take_into_consideration_in_dec_2_22" name="Other_circumstances_exist_that_I_am_requesting_the_court_to_take_into_consideration_in_dec_2_22" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="undefined_6_dec_2_19">Conclusion</label>
+                <textarea class="form-control" id="undefined_6_dec_2_19" name="undefined_6_dec_2_19" rows="2" required></textarea>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="section-header">
+                <h4>Contact Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="cemail">Your Email Address</label>
+                <input type="email" class="form-control" id="cemail" name="cemail" required>
+            </div>
+            <div class="form-group">
+                <label for="cnumber1">Your Phone Number</label>
+                <input type="text" class="form-control" id="cnumber1" name="cnumber1" required>
+            </div>
+            <div class="form-group">
+                <label for="ccourt3">Court Address</label>
+                <input type="text" class="form-control" id="ccourt3" name="ccourt3" required>
+            </div>
+            <div class="form-group">
+                <label for="ccourt4">Court City, State, Zip</label>
+                <input type="text" class="form-control" id="ccourt4" name="ccourt4" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Fill PDF Form</button>
+        </form>
+    </div>
+</body>
+</html>
