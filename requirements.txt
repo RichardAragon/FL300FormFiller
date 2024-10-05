@@ -2,3 +2,4 @@ Flask
 PyMuPDF
 werkzeug
 gunicorn
+requests
