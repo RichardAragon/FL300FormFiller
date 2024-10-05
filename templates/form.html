@@ -194,12 +194,6 @@
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Fill PDF Form</button>
         </form>
-
-        <!-- Missing Sections Notification -->
-        <div id="missingSections" class="alert alert-warning mt-4" style="display: none;">
-            <h5>Sections You Still Need to Complete:</h5>
-            <ul id="missingSectionsList"></ul>
-        </div>
     </div>
 
     <script>
@@ -224,9 +218,6 @@
 
         // Update required fields based on selected case type
         const caseTypeSelect = document.getElementById('caseType');
-        const ordersRequestedFields = document.getElementById('ordersRequestedFields');
-        const missingSectionsDiv = document.getElementById('missingSections');
-        const missingSectionsList = document.getElementById('missingSectionsList');
 
         function updateFieldVisibility() {
             const caseType = caseTypeSelect.value;
@@ -235,6 +226,7 @@
             const allOrderFields = document.querySelectorAll('.orderField');
             allOrderFields.forEach(field => {
                 field.parentElement.style.display = 'none';
+                field.required = false;
             });
 
             // Show fields based on selected case type
@@ -242,69 +234,53 @@
                 const custodyFields = document.querySelectorAll('.custodyField');
                 custodyFields.forEach(field => {
                     field.parentElement.style.display = 'block';
+                    field.required = true;
                 });
             } else if (caseType === 'child_support') {
                 const childSupportFields = document.querySelectorAll('.childSupportField');
                 childSupportFields.forEach(field => {
                     field.parentElement.style.display = 'block';
+                    field.required = true;
                 });
             } else if (caseType === 'spousal_support') {
                 const spousalSupportFields = document.querySelectorAll('.spousalSupportField');
                 spousalSupportFields.forEach(field => {
                     field.parentElement.style.display = 'block';
+                    field.required = true;
                 });
             } else if (caseType === 'property_control') {
                 const propertyControlFields = document.querySelectorAll('.propertyControlField');
                 propertyControlFields.forEach(field => {
                     field.parentElement.style.display = 'block';
+                    field.required = true;
                 });
             } else if (caseType === 'attorney_fees') {
                 const attorneyFeesFields = document.querySelectorAll('.attorneyFeesField');
                 attorneyFeesFields.forEach(field => {
                     field.parentElement.style.display = 'block';
+                    field.required = true;
                 });
             }
         }
 
-        function checkMissingSections() {
-            missingSectionsList.innerHTML = '';
-            const caseType = caseTypeSelect.value;
-            const requiredFields = [];
+        caseTypeSelect.addEventListener('change', updateFieldVisibility);
 
-            if (caseType === 'custody') {
-                requiredFields.push('Child Custody', 'Child Visitation');
-            } else if (caseType === 'child_support') {
-                requiredFields.push('Child Support');
-            } else if (caseType === 'spousal_support') {
-                requiredFields.push('Spousal Support');
-            } else if (caseType === 'property_control') {
-                requiredFields.push('Property Control');
-            } else if (caseType === 'attorney_fees') {
-                requiredFields.push('Attorney's Fees and Costs');
-            }
-
-            requiredFields.forEach(field => {
-                const fieldElement = document.querySelector(`[for="order_${field.toLowerCase().replace(/ /g, '_')}"]`);
-                if (fieldElement && fieldElement.previousElementSibling && !fieldElement.previousElementSibling.checked) {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = field;
-                    missingSectionsList.appendChild(listItem);
+        // Show required sections to complete after submission
+        const fl300Form = document.getElementById('fl300Form');
+        fl300Form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            let missingFields = [];
+            formElements.forEach(field => {
+                if (field.required && field.value.trim() === '') {
+                    missingFields.push(field.name);
                 }
             });
 
-            if (missingSectionsList.children.length > 0) {
-                missingSectionsDiv.style.display = 'block';
+            if (missingFields.length > 0) {
+                alert("You still need to complete the following fields: " + missingFields.join(", "));
             } else {
-                missingSectionsDiv.style.display = 'none';
+                fl300Form.submit();
             }
-        }
-
-        caseTypeSelect.addEventListener('change', () => {
-            updateFieldVisibility();
-            checkMissingSections();
-        });
-        formElements.forEach(element => {
-            element.addEventListener('change', checkMissingSections);
         });
     </script>
 </body>
