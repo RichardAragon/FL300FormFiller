@@ -15,9 +15,6 @@ os.makedirs(FILLED_FORMS_DIR, exist_ok=True)
 # Path to the input PDF form
 INPUT_PDF_PATH = os.path.join('input_forms', 'Xfa_FL300_filled+(1).pdf')  # Ensure this path is correct
 
-# OpenAI API key
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-
 
 def fill_form(pdf_path, output_path, form_data):
     """
@@ -36,7 +33,7 @@ def fill_form(pdf_path, output_path, form_data):
     doc.close()
 
 
-def get_llm_completion(form_data):
+def get_llm_completion(form_data, api_key):
     """
     Queries the LLM model to complete the form data.
     """
@@ -44,7 +41,7 @@ def get_llm_completion(form_data):
         url = "https://api.openai.com/v1/chat/completions"
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {OPENAI_API_KEY}"
+            "Authorization": f"Bearer {api_key}"
         }
         prompt = f"Complete the following form details based on the given data: {form_data}"
         payload = {
@@ -72,6 +69,12 @@ def index():
 @app.route('/fill_form', methods=['POST'])
 def fill_form_route():
     try:
+        # Extract OpenAI API key from the submitted form
+        api_key = request.form.get('openai_api_key', '')
+        if not api_key:
+            flash("OpenAI API key is required to complete the form.", "danger")
+            return redirect(url_for('index'))
+
         # Extract form data from the submitted form
         form_data = {
             'cname1': request.form.get('cname1', ''),
@@ -130,7 +133,7 @@ def fill_form_route():
             form_data[f'childDOB_{i}'] = dob
 
         # Query the LLM model to fill in additional form details
-        llm_completion = get_llm_completion(form_data)
+        llm_completion = get_llm_completion(form_data, api_key)
         if llm_completion:
             form_data.update(eval(llm_completion))
 
