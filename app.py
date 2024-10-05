@@ -1,5 +1,6 @@
 import os
 import fitz  # PyMuPDF
+import requests
 from flask import Flask, render_template, request, send_file, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from io import BytesIO
@@ -13,6 +14,10 @@ os.makedirs(FILLED_FORMS_DIR, exist_ok=True)
 
 # Path to the input PDF form
 INPUT_PDF_PATH = os.path.join('input_forms', 'Xfa_FL300_filled+(1).pdf')  # Ensure this path is correct
+
+# OpenAI API key
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
 
 def fill_form(pdf_path, output_path, form_data):
     """
@@ -30,9 +35,39 @@ def fill_form(pdf_path, output_path, form_data):
     doc.save(output_path)
     doc.close()
 
+
+def get_llm_completion(form_data):
+    """
+    Queries the LLM model to complete the form data.
+    """
+    try:
+        url = "https://api.openai.com/v1/chat/completions"
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {OPENAI_API_KEY}"
+        }
+        prompt = f"Complete the following form details based on the given data: {form_data}"
+        payload = {
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.7
+        }
+        response = requests.post(url, headers=headers, json=payload)
+        response_data = response.json()
+        if response.status_code == 200:
+            return response_data["choices"][0]["message"]["content"]
+        else:
+            print(f"Error from LLM: {response_data}")
+            return {}
+    except Exception as e:
+        print(f"An error occurred while querying the LLM: {e}")
+        return {}
+
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('form.html')
+
 
 @app.route('/fill_form', methods=['POST'])
 def fill_form_route():
@@ -93,6 +128,11 @@ def fill_form_route():
         for i, (name, dob) in enumerate(zip(child_names, child_dobs), start=1):
             form_data[f'childName_{i}'] = name
             form_data[f'childDOB_{i}'] = dob
+
+        # Query the LLM model to fill in additional form details
+        llm_completion = get_llm_completion(form_data)
+        if llm_completion:
+            form_data.update(eval(llm_completion))
 
         # Generate a unique filename for the filled PDF
         filled_pdf_filename = secure_filename(f"filled_form_{os.urandom(8).hex()}.pdf")
