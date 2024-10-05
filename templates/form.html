@@ -39,6 +39,22 @@
         </div>
 
         <form action="{{ url_for('fill_form_route') }}" method="POST" id="fl300Form">
+            <!-- Case Type Selection -->
+            <div class="section-header">
+                <h4>Case Type</h4>
+            </div>
+            <div class="form-group">
+                <label for="caseType">Select Case Type</label>
+                <select class="form-control" id="caseType" name="caseType" required>
+                    <option value="">-- Please Select --</option>
+                    <option value="custody">Child Custody</option>
+                    <option value="child_support">Child Support</option>
+                    <option value="spousal_support">Spousal Support</option>
+                    <option value="property_control">Property Control</option>
+                    <option value="attorney_fees">Attorney's Fees and Costs</option>
+                </select>
+            </div>
+
             <!-- Your Information -->
             <div class="section-header">
                 <h4>Your Information</h4>
@@ -122,10 +138,10 @@
             </div>
 
             <!-- Orders Requested -->
-            <div class="section-header">
+            <div class="section-header" id="ordersRequestedSection" style="display: none;">
                 <h4>Orders Requested</h4>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="ordersRequestedFields" style="display: none;">
                 <label>Check the orders you are requesting:</label>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="order_child_custody" name="rfo_4" value="Yes">
@@ -134,6 +150,22 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="order_child_visitation" name="rfo_2" value="Yes">
                     <label class="form-check-label" for="order_child_visitation">Child Visitation (Parenting Time)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="order_child_support" name="rfo_9" value="Yes">
+                    <label class="form-check-label" for="order_child_support">Child Support</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="order_spousal_support" name="rfo_13" value="Yes">
+                    <label class="form-check-label" for="order_spousal_support">Spousal Support</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="order_property_control" name="rfo_10" value="Yes">
+                    <label class="form-check-label" for="order_property_control">Property Control</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="order_attorney_fees" name="rfo_14" value="Yes">
+                    <label class="form-check-label" for="order_attorney_fees">Attorney's Fees and Costs</label>
                 </div>
             </div>
 
@@ -182,6 +214,21 @@
         // Initialize tooltips
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        // Update required fields based on selected case type
+        const caseTypeSelect = document.getElementById('caseType');
+        const ordersRequestedSection = document.getElementById('ordersRequestedSection');
+        const ordersRequestedFields = document.getElementById('ordersRequestedFields');
+
+        caseTypeSelect.addEventListener('change', function() {
+            if (caseTypeSelect.value) {
+                ordersRequestedSection.style.display = 'block';
+                ordersRequestedFields.style.display = 'block';
+            } else {
+                ordersRequestedSection.style.display = 'none';
+                ordersRequestedFields.style.display = 'none';
+            }
         });
     </script>
 </body>
