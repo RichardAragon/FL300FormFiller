@@ -1,9 +1,11 @@
+# app.py
+
 import os
 import fitz  # PyMuPDF
 from flask import Flask, render_template, request, send_file, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from io import BytesIO
-from form_fields import form_fields
+from form_fields import form_fields  # Ensure this import is correct
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Replace with a strong secret key
@@ -46,11 +48,11 @@ def fill_form_route():
             form_data[web_field] = request.form.get(web_field, '')
 
         # Handle dynamic children information
-        child_names = request.form.getlist('childName[]')
-        child_dobs = request.form.getlist('childDOB[]')
+        child_names = request.form.getlist('child_name[]')  # Ensure this matches your HTML form
+        child_dobs = request.form.getlist('child_date_of_birth[]')  # Ensure this matches your HTML form
         for i, (name, dob) in enumerate(zip(child_names, child_dobs), start=1):
-            form_data[f'childName_{i}'] = name
-            form_data[f'childDOB_{i}'] = dob
+            form_data[f'child_name_{i}'] = name
+            form_data[f'child_date_of_birth_{i}'] = dob
 
         # Generate a unique filename for the filled PDF
         filled_pdf_filename = secure_filename(f"filled_form_{os.urandom(8).hex()}.pdf")
