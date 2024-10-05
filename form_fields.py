@@ -1,6 +1,6 @@
 # form_fields.py
 
-# Mapping of PDF field names to web form field names
+# Mapping of PDF field names to snake_case web form field names
 form_fields = {
     'oter_0': 'other_information',
     'MP1_0': 'mp1_information',
@@ -78,3 +78,4 @@ form_fields = {
     'iefilltext3a1_0': 'additional_field_3',
     'CheckBox31_0': 'checkbox_example'
 }
+
