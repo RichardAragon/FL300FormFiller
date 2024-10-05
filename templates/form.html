@@ -137,6 +137,35 @@
                 <small class="form-text text-muted">Enter your case number, which can be found on your court documents.</small>
             </div>
 
+            <!-- Children Information -->
+            <div class="section-header">
+                <h4>Children Information</h4>
+            </div>
+            <div id="childrenInfoSection">
+                <div class="form-group">
+                    <label for="childName1">Child Name</label>
+                    <input type="text" class="form-control" id="childName1" name="childName[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="childDOB1">Child Date of Birth</label>
+                    <input type="date" class="form-control" id="childDOB1" name="childDOB[]" required>
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary mb-3" id="addChildButton">Add Another Child</button>
+
+            <!-- Income Information -->
+            <div class="section-header">
+                <h4>Income Information</h4>
+            </div>
+            <div class="form-group">
+                <label for="monthlyIncome">Your Monthly Income</label>
+                <input type="number" class="form-control" id="monthlyIncome" name="monthlyIncome" required>
+            </div>
+            <div class="form-group">
+                <label for="otherParentMonthlyIncome">Other Parent's Monthly Income</label>
+                <input type="number" class="form-control" id="otherParentMonthlyIncome" name="otherParentMonthlyIncome" required>
+            </div>
+
             <!-- Orders Requested -->
             <div class="section-header" id="ordersRequestedSection">
                 <h4>Orders Requested</h4>
@@ -264,6 +293,25 @@
         }
 
         caseTypeSelect.addEventListener('change', updateFieldVisibility);
+
+        // Add new child fields
+        const addChildButton = document.getElementById('addChildButton');
+        addChildButton.addEventListener('click', function () {
+            const childrenInfoSection = document.getElementById('childrenInfoSection');
+            const childIndex = childrenInfoSection.querySelectorAll('.form-group').length / 2 + 1;
+
+            const newChildNameDiv = document.createElement('div');
+            newChildNameDiv.classList.add('form-group');
+            newChildNameDiv.innerHTML = `<label for="childName${childIndex}">Child Name</label>
+                                         <input type="text" class="form-control" id="childName${childIndex}" name="childName[]" required>`;
+            childrenInfoSection.appendChild(newChildNameDiv);
+
+            const newChildDOBDiv = document.createElement('div');
+            newChildDOBDiv.classList.add('form-group');
+            newChildDOBDiv.innerHTML = `<label for="childDOB${childIndex}">Child Date of Birth</label>
+                                         <input type="date" class="form-control" id="childDOB${childIndex}" name="childDOB[]" required>`;
+            childrenInfoSection.appendChild(newChildDOBDiv);
+        });
 
         // Show required sections to complete after submission
         const fl300Form = document.getElementById('fl300Form');
