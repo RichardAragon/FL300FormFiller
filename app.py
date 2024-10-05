@@ -1,78 +1,3 @@
-import os
-import fitz  # PyMuPDF
-import requests
-import json
-from flask import Flask, render_template, request, send_file, redirect, url_for, flash
-from werkzeug.utils import secure_filename
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Replace with a strong secret key
-
-# Directory to store filled PDFs temporarily
-FILLED_FORMS_DIR = 'filled_forms'
-os.makedirs(FILLED_FORMS_DIR, exist_ok=True)
-
-# Path to the input PDF form
-INPUT_PDF_PATH = os.path.join('input_forms', 'Xfa_FL300_filled+(1).pdf')  # Ensure this path is correct
-
-
-def fill_form(pdf_path, output_path, form_data):
-    """
-    Fills the PDF form with the provided form data.
-    """
-    try:
-        if not os.path.exists(pdf_path):
-            raise FileNotFoundError(f"Input PDF form not found at: {pdf_path}")
-
-        doc = fitz.open(pdf_path)
-        for page_num, page in enumerate(doc):
-            widgets = page.widgets()
-            if widgets:
-                for widget in widgets:
-                    field_name = widget.field_name
-                    if field_name in form_data:
-                        widget.field_value = form_data[field_name]
-                        widget.update()
-        doc.save(output_path)
-        doc.close()
-    except Exception as e:
-        print(f"Error while filling the form: {e}")
-        raise
-
-
-def get_llm_completion(form_data, api_key):
-    """
-    Queries the LLM model to complete the form data.
-    """
-    try:
-        url = "https://api.openai.com/v1/chat/completions"
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
-        }
-        prompt = f"Complete the following form details based on the given data: {form_data}"
-        payload = {
-            "model": "gpt-4o-mini",
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.7
-        }
-        response = requests.post(url, headers=headers, json=payload)
-        response_data = response.json()
-        if response.status_code == 200:
-            return response_data["choices"][0]["message"]["content"]
-        else:
-            print(f"Error from LLM: {response_data}")
-            return {}
-    except Exception as e:
-        print(f"An error occurred while querying the LLM: {e}")
-        return {}
-
-
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('form.html')
-
-
 @app.route('/fill_form', methods=['POST'])
 def fill_form_route():
     try:
@@ -96,6 +21,20 @@ def fill_form_route():
         for i, (name, dob) in enumerate(zip(child_names, child_dobs), start=1):
             form_data[f'childName_{i}'] = name.strip()
             form_data[f'childDOB_{i}'] = dob.strip()
+
+        # Define the form fields expected to be filled
+        expected_fields = [
+            "caseType", "cname1", "cname2", "cname3", "cname4", "State", "Zip",
+            "cnumber1", "cemail", "ccourt1", "ccourt2", "ccourt3", "cpet1", "cdef1",
+            "ccase", "monthlyIncome", "otherParentMonthlyIncome", "Facts_in_Support",
+            "cdate1", "Text_Field0", "iefilltext1f", "iefilltext2a", "iefilltext3a1", 
+            "CheckBox31", "rfo_4", "rfo_2", "rfo_9", "rfo_13", "rfo_10", "rfo_14"
+        ]
+
+        # Add expected fields that may have been missed in dynamic extraction
+        for field in expected_fields:
+            if field not in form_data:
+                form_data[field] = request.form.get(field, '').strip()
 
         # Query the LLM model to fill in additional form details
         llm_completion = get_llm_completion(form_data, api_key)
@@ -124,7 +63,3 @@ def fill_form_route():
         print(f"An error occurred: {e}")
         flash("An unexpected error occurred while processing your request.", "danger")
         return redirect(url_for('index'))
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
