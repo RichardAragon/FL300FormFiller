@@ -38,61 +38,61 @@ def index():
 def fill_form_route():
     try:
         # Extract form data from the submitted form
-form_data = {
-    'cname1': request.form.get('cname1', ''),
-    'cname2': request.form.get('cname2', ''),
-    'cname3': request.form.get('cname3', ''),
-    'cname4': request.form.get('cname4', ''),
-    'State': request.form.get('State', ''),
-    'Zip': request.form.get('Zip', ''),
-    'cnumber1': request.form.get('cnumber1', ''),
-    'cemail': request.form.get('cemail', ''),
-    'ccourt1': request.form.get('ccourt1', ''),
-    'ccourt2': request.form.get('ccourt2', ''),
-    'ccourt3': request.form.get('ccourt3', ''),
-    'cpet1': request.form.get('cpet1', ''),
-    'cdef1': request.form.get('cdef1', ''),
-    'ccase': request.form.get('ccase', ''),
-    'cdate1': request.form.get('cdate1', ''),
-    'Text_Field0': request.form.get('Text_Field0', ''),
-    'monthlyIncome': request.form.get('monthlyIncome', ''),
-    'otherParentMonthlyIncome': request.form.get('otherParentMonthlyIncome', ''),
-    'Facts_in_Support': request.form.get('Facts_in_Support', ''),
-    'rfo_4': request.form.get('rfo_4', ''),
-    'rfo_2': request.form.get('rfo_2', ''),
-    'rfo_9': request.form.get('rfo_9', ''),
-    'rfo_13': request.form.get('rfo_13', ''),
-    'rfo_10': request.form.get('rfo_10', ''),
-    'rfo_14': request.form.get('rfo_14', ''),
-    # Additional fields from the form
-    'iefilltext1f': request.form.get('iefilltext1f', ''),
-    'iefilltext2a': request.form.get('iefilltext2a', ''),
-    'iefilltext2b': request.form.get('iefilltext2b', ''),
-    'iefilltext3a1': request.form.get('iefilltext3a1', ''),
-    'iefilltext3b1': request.form.get('iefilltext3b1', ''),
-    'iefilltext4a': request.form.get('iefilltext4a', ''),
-    'iefilltext5a1': request.form.get('iefilltext5a1', ''),
-    'iefilltext5b1': request.form.get('iefilltext5b1', ''),
-    'iefilltext6a1': request.form.get('iefilltext6a1', ''),
-    'iefilltext6b1': request.form.get('iefilltext6b1', ''),
-    'iefilltext7a': request.form.get('iefilltext7a', ''),
-    'iefilltext8': request.form.get('iefilltext8', ''),
-    'iefilltext9': request.form.get('iefilltext9', ''),
-    'iefilltext10a': request.form.get('iefilltext10a', ''),
-    'iefilltext11a': request.form.get('iefilltext11a', ''),
-    'iefilltext12a1': request.form.get('iefilltext12a1', ''),
-    'CheckBox31': request.form.get('CheckBox31', ''),
-    'iecheckbox2b1': request.form.get('iecheckbox2b1', ''),
-    'iecheckbox3a1': request.form.get('iecheckbox3a1', ''),
-    'iecheckbox5d1': request.form.get('iecheckbox5d1', ''),
-}
+        form_data = {
+            'cname1': request.form.get('cname1', ''),
+            'cname2': request.form.get('cname2', ''),
+            'cname3': request.form.get('cname3', ''),
+            'cname4': request.form.get('cname4', ''),
+            'State': request.form.get('State', ''),
+            'Zip': request.form.get('Zip', ''),
+            'cnumber1': request.form.get('cnumber1', ''),
+            'cemail': request.form.get('cemail', ''),
+            'ccourt1': request.form.get('ccourt1', ''),
+            'ccourt2': request.form.get('ccourt2', ''),
+            'ccourt3': request.form.get('ccourt3', ''),
+            'cpet1': request.form.get('cpet1', ''),
+            'cdef1': request.form.get('cdef1', ''),
+            'ccase': request.form.get('ccase', ''),
+            'cdate1': request.form.get('cdate1', ''),
+            'Text_Field0': request.form.get('Text_Field0', ''),
+            'monthlyIncome': request.form.get('monthlyIncome', ''),
+            'otherParentMonthlyIncome': request.form.get('otherParentMonthlyIncome', ''),
+            'Facts_in_Support': request.form.get('Facts_in_Support', ''),
+            'rfo_4': request.form.get('rfo_4', ''),
+            'rfo_2': request.form.get('rfo_2', ''),
+            'rfo_9': request.form.get('rfo_9', ''),
+            'rfo_13': request.form.get('rfo_13', ''),
+            'rfo_10': request.form.get('rfo_10', ''),
+            'rfo_14': request.form.get('rfo_14', ''),
+            # Additional fields from the form
+            'iefilltext1f': request.form.get('iefilltext1f', ''),
+            'iefilltext2a': request.form.get('iefilltext2a', ''),
+            'iefilltext2b': request.form.get('iefilltext2b', ''),
+            'iefilltext3a1': request.form.get('iefilltext3a1', ''),
+            'iefilltext3b1': request.form.get('iefilltext3b1', ''),
+            'iefilltext4a': request.form.get('iefilltext4a', ''),
+            'iefilltext5a1': request.form.get('iefilltext5a1', ''),
+            'iefilltext5b1': request.form.get('iefilltext5b1', ''),
+            'iefilltext6a1': request.form.get('iefilltext6a1', ''),
+            'iefilltext6b1': request.form.get('iefilltext6b1', ''),
+            'iefilltext7a': request.form.get('iefilltext7a', ''),
+            'iefilltext8': request.form.get('iefilltext8', ''),
+            'iefilltext9': request.form.get('iefilltext9', ''),
+            'iefilltext10a': request.form.get('iefilltext10a', ''),
+            'iefilltext11a': request.form.get('iefilltext11a', ''),
+            'iefilltext12a1': request.form.get('iefilltext12a1', ''),
+            'CheckBox31': request.form.get('CheckBox31', ''),
+            'iecheckbox2b1': request.form.get('iecheckbox2b1', ''),
+            'iecheckbox3a1': request.form.get('iecheckbox3a1', ''),
+            'iecheckbox5d1': request.form.get('iecheckbox5d1', ''),
+        }
 
-# Handle dynamic children information
-child_names = request.form.getlist('childName[]')
-child_dobs = request.form.getlist('childDOB[]')
-for i, (name, dob) in enumerate(zip(child_names, child_dobs), start=1):
-    form_data[f'childName_{i}'] = name
-    form_data[f'childDOB_{i}'] = dob
+        # Handle dynamic children information
+        child_names = request.form.getlist('childName[]')
+        child_dobs = request.form.getlist('childDOB[]')
+        for i, (name, dob) in enumerate(zip(child_names, child_dobs), start=1):
+            form_data[f'childName_{i}'] = name
+            form_data[f'childDOB_{i}'] = dob
 
         # Generate a unique filename for the filled PDF
         filled_pdf_filename = secure_filename(f"filled_form_{os.urandom(8).hex()}.pdf")
@@ -111,4 +111,3 @@ for i, (name, dob) in enumerate(zip(child_names, child_dobs), start=1):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
