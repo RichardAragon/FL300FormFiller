@@ -194,6 +194,12 @@
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Fill PDF Form</button>
         </form>
+
+        <!-- Missing Sections Notification -->
+        <div id="missingSections" class="alert alert-warning mt-4" style="display: none;">
+            <h5>Sections You Still Need to Complete:</h5>
+            <ul id="missingSectionsList"></ul>
+        </div>
     </div>
 
     <script>
@@ -219,6 +225,8 @@
         // Update required fields based on selected case type
         const caseTypeSelect = document.getElementById('caseType');
         const ordersRequestedFields = document.getElementById('ordersRequestedFields');
+        const missingSectionsDiv = document.getElementById('missingSections');
+        const missingSectionsList = document.getElementById('missingSectionsList');
 
         function updateFieldVisibility() {
             const caseType = caseTypeSelect.value;
@@ -258,7 +266,46 @@
             }
         }
 
-        caseTypeSelect.addEventListener('change', updateFieldVisibility);
+        function checkMissingSections() {
+            missingSectionsList.innerHTML = '';
+            const caseType = caseTypeSelect.value;
+            const requiredFields = [];
+
+            if (caseType === 'custody') {
+                requiredFields.push('Child Custody', 'Child Visitation');
+            } else if (caseType === 'child_support') {
+                requiredFields.push('Child Support');
+            } else if (caseType === 'spousal_support') {
+                requiredFields.push('Spousal Support');
+            } else if (caseType === 'property_control') {
+                requiredFields.push('Property Control');
+            } else if (caseType === 'attorney_fees') {
+                requiredFields.push('Attorney's Fees and Costs');
+            }
+
+            requiredFields.forEach(field => {
+                const fieldElement = document.querySelector(`[for="order_${field.toLowerCase().replace(/ /g, '_')}"]`);
+                if (fieldElement && fieldElement.previousElementSibling && !fieldElement.previousElementSibling.checked) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = field;
+                    missingSectionsList.appendChild(listItem);
+                }
+            });
+
+            if (missingSectionsList.children.length > 0) {
+                missingSectionsDiv.style.display = 'block';
+            } else {
+                missingSectionsDiv.style.display = 'none';
+            }
+        }
+
+        caseTypeSelect.addEventListener('change', () => {
+            updateFieldVisibility();
+            checkMissingSections();
+        });
+        formElements.forEach(element => {
+            element.addEventListener('change', checkMissingSections);
+        });
     </script>
 </body>
 </html>
