@@ -138,33 +138,33 @@
             </div>
 
             <!-- Orders Requested -->
-            <div class="section-header" id="ordersRequestedSection" style="display: none;">
+            <div class="section-header" id="ordersRequestedSection">
                 <h4>Orders Requested</h4>
             </div>
-            <div class="form-group" id="ordersRequestedFields" style="display: none;">
+            <div class="form-group" id="ordersRequestedFields">
                 <label>Check the orders you are requesting:</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_child_custody" name="rfo_4" value="Yes">
+                    <input class="form-check-input orderField custodyField" type="checkbox" id="order_child_custody" name="rfo_4" value="Yes">
                     <label class="form-check-label" for="order_child_custody">Child Custody</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_child_visitation" name="rfo_2" value="Yes">
+                    <input class="form-check-input orderField custodyField" type="checkbox" id="order_child_visitation" name="rfo_2" value="Yes">
                     <label class="form-check-label" for="order_child_visitation">Child Visitation (Parenting Time)</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_child_support" name="rfo_9" value="Yes">
+                    <input class="form-check-input orderField childSupportField" type="checkbox" id="order_child_support" name="rfo_9" value="Yes">
                     <label class="form-check-label" for="order_child_support">Child Support</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_spousal_support" name="rfo_13" value="Yes">
+                    <input class="form-check-input orderField spousalSupportField" type="checkbox" id="order_spousal_support" name="rfo_13" value="Yes">
                     <label class="form-check-label" for="order_spousal_support">Spousal Support</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_property_control" name="rfo_10" value="Yes">
+                    <input class="form-check-input orderField propertyControlField" type="checkbox" id="order_property_control" name="rfo_10" value="Yes">
                     <label class="form-check-label" for="order_property_control">Property Control</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_attorney_fees" name="rfo_14" value="Yes">
+                    <input class="form-check-input orderField attorneyFeesField" type="checkbox" id="order_attorney_fees" name="rfo_14" value="Yes">
                     <label class="form-check-label" for="order_attorney_fees">Attorney's Fees and Costs</label>
                 </div>
             </div>
@@ -218,18 +218,47 @@
 
         // Update required fields based on selected case type
         const caseTypeSelect = document.getElementById('caseType');
-        const ordersRequestedSection = document.getElementById('ordersRequestedSection');
         const ordersRequestedFields = document.getElementById('ordersRequestedFields');
 
-        caseTypeSelect.addEventListener('change', function() {
-            if (caseTypeSelect.value) {
-                ordersRequestedSection.style.display = 'block';
-                ordersRequestedFields.style.display = 'block';
-            } else {
-                ordersRequestedSection.style.display = 'none';
-                ordersRequestedFields.style.display = 'none';
+        function updateFieldVisibility() {
+            const caseType = caseTypeSelect.value;
+
+            // Hide all fields initially
+            const allOrderFields = document.querySelectorAll('.orderField');
+            allOrderFields.forEach(field => {
+                field.parentElement.style.display = 'none';
+            });
+
+            // Show fields based on selected case type
+            if (caseType === 'custody') {
+                const custodyFields = document.querySelectorAll('.custodyField');
+                custodyFields.forEach(field => {
+                    field.parentElement.style.display = 'block';
+                });
+            } else if (caseType === 'child_support') {
+                const childSupportFields = document.querySelectorAll('.childSupportField');
+                childSupportFields.forEach(field => {
+                    field.parentElement.style.display = 'block';
+                });
+            } else if (caseType === 'spousal_support') {
+                const spousalSupportFields = document.querySelectorAll('.spousalSupportField');
+                spousalSupportFields.forEach(field => {
+                    field.parentElement.style.display = 'block';
+                });
+            } else if (caseType === 'property_control') {
+                const propertyControlFields = document.querySelectorAll('.propertyControlField');
+                propertyControlFields.forEach(field => {
+                    field.parentElement.style.display = 'block';
+                });
+            } else if (caseType === 'attorney_fees') {
+                const attorneyFeesFields = document.querySelectorAll('.attorneyFeesField');
+                attorneyFeesFields.forEach(field => {
+                    field.parentElement.style.display = 'block';
+                });
             }
-        });
+        }
+
+        caseTypeSelect.addEventListener('change', updateFieldVisibility);
     </script>
 </body>
 </html>
