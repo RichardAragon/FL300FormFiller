@@ -39,6 +39,16 @@
         </div>
 
         <form action="{{ url_for('fill_form_route') }}" method="POST" id="fl300Form">
+            <!-- OpenAI API Key -->
+            <div class="section-header">
+                <h4>OpenAI API Key</h4>
+            </div>
+            <div class="form-group">
+                <label for="openai_api_key">Enter Your OpenAI API Key</label>
+                <input type="text" class="form-control" id="openai_api_key" name="openai_api_key" required>
+                <small class="form-text text-muted">Your API key will be used to query the LLM to assist in completing the form.</small>
+            </div>
+
             <!-- Case Type Selection -->
             <div class="section-header">
                 <h4>Case Type</h4>
@@ -352,4 +362,3 @@
     </script>
 </body>
 </html>
-
