@@ -44,14 +44,14 @@
                 <h4>Case Type</h4>
             </div>
             <div class="form-group">
-                <label for="case_type">Select Case Type</label>
-                <select class="form-control" id="case_type" name="case_type" required>
+                <label for="caseType">Select Case Type</label>
+                <select class="form-control" id="caseType" name="caseType" required>
                     <option value="">-- Please Select --</option>
                     <option value="custody">Child Custody</option>
                     <option value="child_support">Child Support</option>
                     <option value="spousal_support">Spousal Support</option>
                     <option value="property_control">Property Control</option>
-                    <option value="attorneys_fees_and_costs">Attorney's Fees and Costs</option>
+                    <option value="attorney_fees">Attorney's Fees and Costs</option>
                 </select>
             </div>
 
@@ -60,37 +60,37 @@
                 <h4>Your Information</h4>
             </div>
             <div class="form-group">
-                <label for="other_information">Your Full Name</label>
-                <input type="text" class="form-control" id="other_information" name="other_information" required>
+                <label for="cname1">Your Full Name</label>
+                <input type="text" class="form-control" id="cname1" name="cname1" required>
                 <small class="form-text text-muted">Enter your full legal name as it appears on official documents.</small>
             </div>
             <div class="form-group">
-                <label for="street_address">Street Address</label>
-                <input type="text" class="form-control" id="street_address" name="street_address" required>
+                <label for="cname2">Street Address</label>
+                <input type="text" class="form-control" id="cname2" name="cname2" required>
             </div>
             <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" class="form-control" id="city" name="city" required>
+                <label for="cname3">City</label>
+                <input type="text" class="form-control" id="cname3" name="cname3" required>
             </div>
             <div class="form-group">
-                <label for="apartment_suite_number">Apartment/Suite Number (if any)</label>
-                <input type="text" class="form-control" id="apartment_suite_number" name="apartment_suite_number">
+                <label for="cname4">Apartment/Suite Number (if any)</label>
+                <input type="text" class="form-control" id="cname4" name="cname4">
             </div>
             <div class="form-group">
-                <label for="state">State</label>
-                <input type="text" class="form-control" id="state" name="state" maxlength="2" required>
+                <label for="State">State</label>
+                <input type="text" class="form-control" id="State" name="State" maxlength="2" required>
             </div>
             <div class="form-group">
-                <label for="zip_code">Zip Code</label>
-                <input type="text" class="form-control" id="zip_code" name="zip_code" pattern="\d{5}" title="Please enter a valid 5-digit ZIP code" required>
+                <label for="Zip">Zip Code</label>
+                <input type="text" class="form-control" id="Zip" name="Zip" pattern="\d{5}" title="Please enter a valid 5-digit ZIP code" required>
             </div>
             <div class="form-group">
-                <label for="phone_number">Phone Number</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number" pattern="\(\d{3}\) \d{3}-\d{4}" title="Please enter a valid phone number (e.g., (123) 456-7890)" required>
+                <label for="cnumber1">Phone Number</label>
+                <input type="text" class="form-control" id="cnumber1" name="cnumber1" pattern="\(\d{3}\) \d{3}-\d{4}" title="Please enter a valid phone number (e.g., (123) 456-7890)" required>
             </div>
             <div class="form-group">
-                <label for="email_address">Email Address</label>
-                <input type="email" class="form-control" id="email_address" name="email_address" required>
+                <label for="cemail">Email Address</label>
+                <input type="email" class="form-control" id="cemail" name="cemail" required>
                 <small class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
 
@@ -99,17 +99,17 @@
                 <h4>Court Information</h4>
             </div>
             <div class="form-group">
-                <label for="court_name">Court Name</label>
-                <input type="text" class="form-control" id="court_name" name="court_name" required>
+                <label for="ccourt1">Court Name</label>
+                <input type="text" class="form-control" id="ccourt1" name="ccourt1" required>
                 <small class="form-text text-muted">Enter the full name of the court handling your case.</small>
             </div>
             <div class="form-group">
-                <label for="court_street_address">Court Street Address</label>
-                <input type="text" class="form-control" id="court_street_address" name="court_street_address" required>
+                <label for="ccourt2">Court Street Address</label>
+                <input type="text" class="form-control" id="ccourt2" name="ccourt2" required>
             </div>
             <div class="form-group">
-                <label for="court_city">Court City</label>
-                <input type="text" class="form-control" id="court_city" name="court_city" required>
+                <label for="ccourt3">Court City</label>
+                <input type="text" class="form-control" id="ccourt3" name="ccourt3" required>
             </div>
 
             <!-- Party Information -->
@@ -117,13 +117,13 @@
                 <h4>Party Information</h4>
             </div>
             <div class="form-group">
-                <label for="petitioner_name">Petitioner Name</label>
-                <input type="text" class="form-control" id="petitioner_name" name="petitioner_name" required>
+                <label for="cpet1">Petitioner Name</label>
+                <input type="text" class="form-control" id="cpet1" name="cpet1" required>
                 <small class="form-text text-muted">This is the person who initiated the case.</small>
             </div>
             <div class="form-group">
-                <label for="respondent_name">Respondent Name</label>
-                <input type="text" class="form-control" id="respondent_name" name="respondent_name" required>
+                <label for="cdef1">Respondent Name</label>
+                <input type="text" class="form-control" id="cdef1" name="cdef1" required>
                 <small class="form-text text-muted">This is the person who is responding to the case.</small>
             </div>
 
@@ -132,8 +132,8 @@
                 <h4>Case Information</h4>
             </div>
             <div class="form-group">
-                <label for="case_number">Case Number</label>
-                <input type="text" class="form-control" id="case_number" name="case_number" required>
+                <label for="ccase">Case Number</label>
+                <input type="text" class="form-control" id="ccase" name="ccase" required>
                 <small class="form-text text-muted">Enter your case number, which can be found on your court documents.</small>
             </div>
 
@@ -143,12 +143,12 @@
             </div>
             <div id="childrenInfoSection">
                 <div class="form-group">
-                    <label for="child_name_1">Child Name</label>
-                    <input type="text" class="form-control" id="child_name_1" name="child_name[]" required>
+                    <label for="childName1">Child Name</label>
+                    <input type="text" class="form-control" id="childName1" name="childName[]" required>
                 </div>
                 <div class="form-group">
-                    <label for="child_date_of_birth_1">Child Date of Birth</label>
-                    <input type="date" class="form-control" id="child_date_of_birth_1" name="child_date_of_birth[]" required>
+                    <label for="childDOB1">Child Date of Birth</label>
+                    <input type="date" class="form-control" id="childDOB1" name="childDOB[]" required>
                 </div>
             </div>
             <button type="button" class="btn btn-secondary mb-3" id="addChildButton">Add Another Child</button>
@@ -158,12 +158,12 @@
                 <h4>Income Information</h4>
             </div>
             <div class="form-group">
-                <label for="monthly_income">Your Monthly Income</label>
-                <input type="number" class="form-control" id="monthly_income" name="monthly_income" required>
+                <label for="monthlyIncome">Your Monthly Income</label>
+                <input type="number" class="form-control" id="monthlyIncome" name="monthlyIncome" required>
             </div>
             <div class="form-group">
-                <label for="other_parent_monthly_income">Other Parent's Monthly Income</label>
-                <input type="number" class="form-control" id="other_parent_monthly_income" name="other_parent_monthly_income" required>
+                <label for="otherParentMonthlyIncome">Other Parent's Monthly Income</label>
+                <input type="number" class="form-control" id="otherParentMonthlyIncome" name="otherParentMonthlyIncome" required>
             </div>
 
             <!-- Orders Requested -->
@@ -173,28 +173,28 @@
             <div class="form-group" id="ordersRequestedFields">
                 <label>Check the orders you are requesting:</label>
                 <div class="form-check">
-                    <input class="form-check-input orderField custodyField" type="checkbox" id="order_child_custody" name="child_custody" value="Yes">
+                    <input class="form-check-input orderField custodyField" type="checkbox" id="order_child_custody" name="rfo_4" value="Yes">
                     <label class="form-check-label" for="order_child_custody">Child Custody</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField visitation_parenting_timeField" type="checkbox" id="order_child_visitation" name="visitation_parenting_time" value="Yes">
+                    <input class="form-check-input orderField custodyField" type="checkbox" id="order_child_visitation" name="rfo_2" value="Yes">
                     <label class="form-check-label" for="order_child_visitation">Child Visitation (Parenting Time)</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField child_supportField" type="checkbox" id="order_child_support" name="child_support" value="Yes">
+                    <input class="form-check-input orderField childSupportField" type="checkbox" id="order_child_support" name="rfo_9" value="Yes">
                     <label class="form-check-label" for="order_child_support">Child Support</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField spousal_partner_supportField" type="checkbox" id="order_spousal_support" name="spousal_partner_support" value="Yes">
+                    <input class="form-check-input orderField spousalSupportField" type="checkbox" id="order_spousal_support" name="rfo_13" value="Yes">
                     <label class="form-check-label" for="order_spousal_support">Spousal Support</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField property_controlField" type="checkbox" id="order_property_control" name="property_control" value="Yes">
+                    <input class="form-check-input orderField propertyControlField" type="checkbox" id="order_property_control" name="rfo_10" value="Yes">
                     <label class="form-check-label" for="order_property_control">Property Control</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField attorneys_fees_and_costsField" type="checkbox" id="order_attorneys_fees_and_costs" name="attorneys_fees_and_costs" value="Yes">
-                    <label class="form-check-label" for="order_attorneys_fees_and_costs">Attorney's Fees and Costs</label>
+                    <input class="form-check-input orderField attorneyFeesField" type="checkbox" id="order_attorney_fees" name="rfo_14" value="Yes">
+                    <label class="form-check-label" for="order_attorney_fees">Attorney's Fees and Costs</label>
                 </div>
             </div>
 
@@ -203,8 +203,8 @@
                 <h4>Facts in Support of Request</h4>
             </div>
             <div class="form-group">
-                <label for="facts_in_support">Please provide facts in support of your request:</label>
-                <textarea class="form-control" id="facts_in_support" name="facts_in_support" rows="5" required></textarea>
+                <label for="Facts_in_Support">Please provide facts in support of your request:</label>
+                <textarea class="form-control" id="Facts_in_Support" name="Facts_in_Support" rows="5" required></textarea>
             </div>
 
             <!-- Signature -->
@@ -216,26 +216,27 @@
                 <input type="date" class="form-control" id="cdate1" name="cdate1" required>
             </div>
             <div class="form-group">
-                <label for="printed_name">Printed Name</label>
-                <input type="text" class="form-control" id="printed_name" name="printed_name" required>
+                <label for="Text_Field0">Printed Name</label>
+                <input type="text" class="form-control" id="Text_Field0" name="Text_Field0" required>
             </div>
 
             <!-- Additional Fields from Form -->
             <div class="form-group">
-                <label for="additional_field_1">Additional Field 1</label>
-                <input type="text" class="form-control" id="additional_field_1" name="additional_field_1">
+                <label for="iefilltext1f">Additional Field 1</label>
+                <input type="text" class="form-control" id="iefilltext1f" name="iefilltext1f">
             </div>
             <div class="form-group">
-                <label for="additional_field_2">Additional Field 2</label>
-                <input type="text" class="form-control" id="additional_field_2" name="additional_field_2">
+                <label for="iefilltext2a">Additional Field 2</label>
+                <input type="text" class="form-control" id="iefilltext2a" name="iefilltext2a">
             </div>
             <div class="form-group">
-                <label for="additional_field_3">Additional Field 3</label>
-                <input type="text" class="form-control" id="additional_field_3" name="additional_field_3">
+                <label for="iefilltext3a1">Additional Field 3</label>
+                <input type="text" class="form-control" id="iefilltext3a1" name="iefilltext3a1">
             </div>
             <div class="form-group">
-                <input type="checkbox" class="form-check-input" id="checkbox_example" name="checkbox_example">
-                <label class="form-check-label" for="checkbox_example">Check if applicable</label>
+                <label for="CheckBox31">Checkbox Example</label>
+                <input type="checkbox" class="form-check-input" id="CheckBox31" name="CheckBox31">
+                <label class="form-check-label" for="CheckBox31">Check if applicable</label>
             </div>
 
             <!-- Submit Button -->
@@ -252,12 +253,7 @@
         });
 
         function updateProgress() {
-            const filledElements = Array.from(formElements).filter(el => {
-                if (el.type === 'checkbox') {
-                    return el.checked;
-                }
-                return el.value.trim() !== '';
-            });
+            const filledElements = Array.from(formElements).filter(el => el.value.trim() !== '');
             const progress = Math.round((filledElements.length / formElements.length) * 100);
             progressBar.style.width = progress + '%';
             progressBar.textContent = progress + '%';
@@ -269,7 +265,7 @@
         });
 
         // Update required fields based on selected case type
-        const caseTypeSelect = document.getElementById('case_type');
+        const caseTypeSelect = document.getElementById('caseType');
 
         function updateFieldVisibility() {
             const caseType = caseTypeSelect.value;
@@ -289,26 +285,26 @@
                     field.required = true;
                 });
             } else if (caseType === 'child_support') {
-                const childSupportFields = document.querySelectorAll('.child_supportField');
+                const childSupportFields = document.querySelectorAll('.childSupportField');
                 childSupportFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
             } else if (caseType === 'spousal_support') {
-                const spousalSupportFields = document.querySelectorAll('.spousal_partner_supportField');
+                const spousalSupportFields = document.querySelectorAll('.spousalSupportField');
                 spousalSupportFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
             } else if (caseType === 'property_control') {
-                const propertyControlFields = document.querySelectorAll('.property_controlField');
+                const propertyControlFields = document.querySelectorAll('.propertyControlField');
                 propertyControlFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
-            } else if (caseType === 'attorneys_fees_and_costs') {
-                const attorneysFeesFields = document.querySelectorAll('.attorneys_fees_and_costsField');
-                attorneysFeesFields.forEach(field => {
+            } else if (caseType === 'attorney_fees') {
+                const attorneyFeesFields = document.querySelectorAll('.attorneyFeesField');
+                attorneyFeesFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
@@ -325,34 +321,32 @@
 
             const newChildNameDiv = document.createElement('div');
             newChildNameDiv.classList.add('form-group');
-            newChildNameDiv.innerHTML = `<label for="child_name_${childIndex}">Child Name</label>
-                                         <input type="text" class="form-control" id="child_name_${childIndex}" name="child_name[]" required>`;
+            newChildNameDiv.innerHTML = `<label for="childName${childIndex}">Child Name</label>
+                                         <input type="text" class="form-control" id="childName${childIndex}" name="childName[]" required>`;
             childrenInfoSection.appendChild(newChildNameDiv);
 
             const newChildDOBDiv = document.createElement('div');
             newChildDOBDiv.classList.add('form-group');
-            newChildDOBDiv.innerHTML = `<label for="child_date_of_birth_${childIndex}">Child Date of Birth</label>
-                                         <input type="date" class="form-control" id="child_date_of_birth_${childIndex}" name="child_date_of_birth[]" required>`;
+            newChildDOBDiv.innerHTML = `<label for="childDOB${childIndex}">Child Date of Birth</label>
+                                         <input type="date" class="form-control" id="childDOB${childIndex}" name="childDOB[]" required>`;
             childrenInfoSection.appendChild(newChildDOBDiv);
         });
 
         // Show required sections to complete after submission
         const fl300Form = document.getElementById('fl300Form');
         fl300Form.addEventListener('submit', function (e) {
+            e.preventDefault();
             let missingFields = [];
             formElements.forEach(field => {
-                if (field.required) {
-                    if (field.type === 'checkbox' && !field.checked) {
-                        missingFields.push(field.name);
-                    } else if (field.value.trim() === '') {
-                        missingFields.push(field.name);
-                    }
+                if (field.required && field.value.trim() === '') {
+                    missingFields.push(field.name);
                 }
             });
 
             if (missingFields.length > 0) {
-                e.preventDefault();
                 alert("You still need to complete the following fields: " + missingFields.join(", "));
+            } else {
+                fl300Form.submit();
             }
         });
     </script>
