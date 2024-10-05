@@ -177,23 +177,23 @@
                     <label class="form-check-label" for="order_child_custody">Child Custody</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField visitationParentingTimeField" type="checkbox" id="order_child_visitation" name="visitation_parenting_time" value="Yes">
+                    <input class="form-check-input orderField visitation_parenting_timeField" type="checkbox" id="order_child_visitation" name="visitation_parenting_time" value="Yes">
                     <label class="form-check-label" for="order_child_visitation">Child Visitation (Parenting Time)</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField childSupportField" type="checkbox" id="order_child_support" name="child_support" value="Yes">
+                    <input class="form-check-input orderField child_supportField" type="checkbox" id="order_child_support" name="child_support" value="Yes">
                     <label class="form-check-label" for="order_child_support">Child Support</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField spousalSupportField" type="checkbox" id="order_spousal_support" name="spousal_partner_support" value="Yes">
+                    <input class="form-check-input orderField spousal_partner_supportField" type="checkbox" id="order_spousal_support" name="spousal_partner_support" value="Yes">
                     <label class="form-check-label" for="order_spousal_support">Spousal Support</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField propertyControlField" type="checkbox" id="order_property_control" name="property_control" value="Yes">
+                    <input class="form-check-input orderField property_controlField" type="checkbox" id="order_property_control" name="property_control" value="Yes">
                     <label class="form-check-label" for="order_property_control">Property Control</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input orderField attorneysFeesAndCostsField" type="checkbox" id="order_attorneys_fees_and_costs" name="attorneys_fees_and_costs" value="Yes">
+                    <input class="form-check-input orderField attorneys_fees_and_costsField" type="checkbox" id="order_attorneys_fees_and_costs" name="attorneys_fees_and_costs" value="Yes">
                     <label class="form-check-label" for="order_attorneys_fees_and_costs">Attorney's Fees and Costs</label>
                 </div>
             </div>
@@ -289,25 +289,25 @@
                     field.required = true;
                 });
             } else if (caseType === 'child_support') {
-                const childSupportFields = document.querySelectorAll('.childSupportField');
+                const childSupportFields = document.querySelectorAll('.child_supportField');
                 childSupportFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
             } else if (caseType === 'spousal_support') {
-                const spousalSupportFields = document.querySelectorAll('.spousalSupportField');
+                const spousalSupportFields = document.querySelectorAll('.spousal_partner_supportField');
                 spousalSupportFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
             } else if (caseType === 'property_control') {
-                const propertyControlFields = document.querySelectorAll('.propertyControlField');
+                const propertyControlFields = document.querySelectorAll('.property_controlField');
                 propertyControlFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
                 });
             } else if (caseType === 'attorneys_fees_and_costs') {
-                const attorneysFeesFields = document.querySelectorAll('.attorneysFeesAndCostsField');
+                const attorneysFeesFields = document.querySelectorAll('.attorneys_fees_and_costsField');
                 attorneysFeesFields.forEach(field => {
                     field.parentElement.style.display = 'block';
                     field.required = true;
@@ -358,3 +358,4 @@
     </script>
 </body>
 </html>
+
