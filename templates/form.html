@@ -6,7 +6,6 @@
     <!-- Include Bootstrap CSS for styling -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
-        /* Custom styles here */
         .container {
             margin-top: 50px;
             max-width: 800px;
@@ -17,12 +16,29 @@
             border-bottom: 2px solid #ccc;
             padding-bottom: 5px;
         }
+        .tooltip-inner {
+            max-width: 350px;
+            text-align: left;
+        }
+        .progress {
+            height: 20px;
+        }
     </style>
+    <!-- Include jQuery and Bootstrap JS for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h2 class="mb-4">FL-300 Form Auto-Filler</h2>
-        <form action="{{ url_for('fill_form_route') }}" method="POST">
+
+        <!-- Progress Bar -->
+        <div class="progress mb-4">
+            <div class="progress-bar" role="progressbar" style="width: 0%;" id="progressBar">0%</div>
+        </div>
+
+        <form action="{{ url_for('fill_form_route') }}" method="POST" id="fl300Form">
             <!-- Your Information -->
             <div class="section-header">
                 <h4>Your Information</h4>
@@ -30,6 +46,7 @@
             <div class="form-group">
                 <label for="cname1">Your Full Name</label>
                 <input type="text" class="form-control" id="cname1" name="cname1" required>
+                <small class="form-text text-muted">Enter your full legal name as it appears on official documents.</small>
             </div>
             <div class="form-group">
                 <label for="cname2">Street Address</label>
@@ -45,30 +62,20 @@
             </div>
             <div class="form-group">
                 <label for="State">State</label>
-                <input type="text" class="form-control" id="State" name="State" required>
+                <input type="text" class="form-control" id="State" name="State" maxlength="2" required>
             </div>
             <div class="form-group">
                 <label for="Zip">Zip Code</label>
-                <input type="text" class="form-control" id="Zip" name="Zip" required>
+                <input type="text" class="form-control" id="Zip" name="Zip" pattern="\d{5}" title="Please enter a valid 5-digit ZIP code" required>
             </div>
             <div class="form-group">
                 <label for="cnumber1">Phone Number</label>
-                <input type="text" class="form-control" id="cnumber1" name="cnumber1" required>
-            </div>
-            <div class="form-group">
-                <label for="cnumber2">Fax Number (if any)</label>
-                <input type="text" class="form-control" id="cnumber2" name="cnumber2">
+                <input type="text" class="form-control" id="cnumber1" name="cnumber1" pattern="\(\d{3}\) \d{3}-\d{4}" title="Please enter a valid phone number (e.g., (123) 456-7890)" required>
             </div>
             <div class="form-group">
                 <label for="cemail">Email Address</label>
                 <input type="email" class="form-control" id="cemail" name="cemail" required>
-            </div>
-            <div class="form-group">
-                <label for="cself">Representation</label>
-                <select class="form-control" id="cself" name="cself">
-                    <option value="In Pro Per">Self-Represented (In Pro Per)</option>
-                    <option value="Attorney">Attorney</option>
-                </select>
+                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
 
             <!-- Court Information -->
@@ -78,6 +85,7 @@
             <div class="form-group">
                 <label for="ccourt1">Court Name</label>
                 <input type="text" class="form-control" id="ccourt1" name="ccourt1" required>
+                <small class="form-text text-muted">Enter the full name of the court handling your case.</small>
             </div>
             <div class="form-group">
                 <label for="ccourt2">Court Street Address</label>
@@ -87,18 +95,6 @@
                 <label for="ccourt3">Court City</label>
                 <input type="text" class="form-control" id="ccourt3" name="ccourt3" required>
             </div>
-            <div class="form-group">
-                <label for="court_State">Court State</label>
-                <input type="text" class="form-control" id="court_State" name="court_State" required>
-            </div>
-            <div class="form-group">
-                <label for="court_Zip">Court Zip Code</label>
-                <input type="text" class="form-control" id="court_Zip" name="court_Zip" required>
-            </div>
-            <div class="form-group">
-                <label for="ccourt4">Court Branch Name (if any)</label>
-                <input type="text" class="form-control" id="ccourt4" name="ccourt4">
-            </div>
 
             <!-- Party Information -->
             <div class="section-header">
@@ -107,22 +103,12 @@
             <div class="form-group">
                 <label for="cpet1">Petitioner Name</label>
                 <input type="text" class="form-control" id="cpet1" name="cpet1" required>
+                <small class="form-text text-muted">This is the person who initiated the case.</small>
             </div>
             <div class="form-group">
                 <label for="cdef1">Respondent Name</label>
                 <input type="text" class="form-control" id="cdef1" name="cdef1" required>
-            </div>
-            <div class="form-group">
-                <label for="cop1">Other Party Name (if any)</label>
-                <input type="text" class="form-control" id="cop1" name="cop1">
-            </div>
-            <div class="form-group">
-                <label for="cresps1">Your Role</label>
-                <select class="form-control" id="cresps1" name="cresps1" required>
-                    <option value="Petitioner">Petitioner</option>
-                    <option value="Respondent">Respondent</option>
-                    <option value="Other">Other</option>
-                </select>
+                <small class="form-text text-muted">This is the person who is responding to the case.</small>
             </div>
 
             <!-- Case Information -->
@@ -132,6 +118,7 @@
             <div class="form-group">
                 <label for="ccase">Case Number</label>
                 <input type="text" class="form-control" id="ccase" name="ccase" required>
+                <small class="form-text text-muted">Enter your case number, which can be found on your court documents.</small>
             </div>
 
             <!-- Orders Requested -->
@@ -147,30 +134,6 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="order_child_visitation" name="rfo_2" value="Yes">
                     <label class="form-check-label" for="order_child_visitation">Child Visitation (Parenting Time)</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_child_support" name="rfo_9" value="Yes">
-                    <label class="form-check-label" for="order_child_support">Child Support</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_spousal_support" name="rfo_13" value="Yes">
-                    <label class="form-check-label" for="order_spousal_support">Spousal or Partner Support</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_property_control" name="rfo_10" value="Yes">
-                    <label class="form-check-label" for="order_property_control">Property Control</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_attorney_fees" name="rfo_14" value="Yes">
-                    <label class="form-check-label" for="order_attorney_fees">Attorney's Fees and Costs</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="order_other" name="rfo15">
-                    <label class="form-check-label" for="order_other">Other (specify below)</label>
-                </div>
-                <div class="form-group" style="margin-top:10px;">
-                    <label for="rfo15">If 'Other', please specify:</label>
-                    <input type="text" class="form-control" id="rfo15" name="rfo15">
                 </div>
             </div>
 
@@ -200,5 +163,26 @@
             <button type="submit" class="btn btn-primary">Fill PDF Form</button>
         </form>
     </div>
+
+    <script>
+        // Update progress bar as user fills the form
+        const formElements = document.querySelectorAll('#fl300Form input, #fl300Form select, #fl300Form textarea');
+        const progressBar = document.getElementById('progressBar');
+        formElements.forEach(element => {
+            element.addEventListener('input', updateProgress);
+        });
+
+        function updateProgress() {
+            const filledElements = Array.from(formElements).filter(el => el.value.trim() !== '');
+            const progress = Math.round((filledElements.length / formElements.length) * 100);
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = progress + '%';
+        }
+
+        // Initialize tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
 </body>
 </html>
