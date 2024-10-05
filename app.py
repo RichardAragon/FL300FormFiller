@@ -9,10 +9,6 @@ app = Flask(__name__)
 # Use environment variable for secret key
 app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24))
 
-# Directory to store filled PDFs temporarily
-FILLED_FORMS_DIR = 'filled_forms'
-os.makedirs(FILLED_FORMS_DIR, exist_ok=True)
-
 # Path to the input PDF form
 INPUT_PDF_PATH = os.path.join('input_forms', 'FL-300_Form_Template.pdf')  # Ensure this path is correct
 
@@ -85,8 +81,9 @@ def fill_form_route():
         return send_file(
             pdf_bytes,
             as_attachment=True,
-            attachment_filename='FL-300_Filled.pdf',
-            mimetype='application/pdf'
+            download_name='FL-300_Filled.pdf',
+            mimetype='application/pdf',
+            cache_timeout=0
         )
 
     except Exception as e:
